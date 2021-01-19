@@ -1,5 +1,5 @@
 # EmployeeMoon Tuition Reimbursement Management System
-
+##### (Creators: Sandra, Nagma, & Petra)
 ### Overview
 The purpose of the Tuition Reimbursement Management System(TRMS) is to provide a system that encourages quality knowledge growth relevant to an individual’s expertise. The
 new TRMS design will incorporate:
