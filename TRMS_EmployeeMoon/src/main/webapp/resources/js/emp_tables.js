@@ -44,33 +44,27 @@ function loadEmployeesFormTableTwo(ePerson){
 	console.log("emp_table.js : loadEmployeesFormTableTwo(): " + ePerson.length);
 
 	for(let i = 0; i < tableLength; i++){
-	
-		msg2 += '<hr><b> Employee: Form Id:</b>' + 
+
+		msg2 += '<hr><b> Employee: Form Id:</b>' +
 		` <span class="c_emp-style"> ${ePerson[i].id} </span>
 		  &nbsp   | &nbsp
-		 <span class="c_emp-style c_emp-style-${ePerson[i].formId }">
+		 <span class="c_emp-style c_emp-style-${ePerson[i].formId}">
 		
-		 <span href="#" 
-		 
-		 onclick="function loadValues()
-		 
-		 {
-		 			//alert('Hi!')
-		 			document.getElementById('i_formId').value = ${ePerson[i].id}
-		 			document.getElementById('i_employeeId').value = ${ePerson[i].employeeId}
-		 			document.getElementById('i_estimReimbursement').value = ${ePerson[i].estimatedReimbursement}
-		 };
-		 
-		 						loadValues()">   
-		 					<b>Full Name: </b> ${ePerson[i].firstName} ${ePerson[i].lastName} </span></span>
+		 <span href="#" onclick="function loadValues(){
+            document.getElementById('i_formId').value = ${ePerson[i].id}
+		 	document.getElementById('i_employeeId').value = ${ePerson[i].employeeId}
+		 	document.getElementById('i_estimReimbursement').value = ${ePerson[i].estimatedReimbursement} 
+         } loadValues()"> 
+         	<b>Full Name: </b> ${ePerson[i].firstName} ${ePerson[i].lastName} 
+         	</span></span>
 		
 	  						&nbsp  | &nbsp
 							<span class="c_emp-style" onclick='loadValues'> 
 							 <b>Employee Id:</b> ${ePerson[i].employeeId}   </span>					
 							 &nbsp  |  &nbsp 
-							<b> Current Date:</b> ${new Date(ePerson[i].currDate).toLocaleString('en-US',{hour12:false}).split(", ")} 
+							<b> Current Date:</b> ${new Date(ePerson[i].currDate).toLocaleString('en-US', {hour12: false}).split(", ")} 
 							   &nbsp  |  &nbsp  
-							   <b>Event Date:</b> ${new Date(ePerson[i].eventDate).toLocaleString('en-US',{hour12:false}).split(", ")} 
+							   <b>Event Date:</b> ${new Date(ePerson[i].eventDate).toLocaleString('en-US', {hour12: false}).split(", ")} 
 							   &nbsp  |  &nbsp  
 							   <b>Event Time:</b> ${ePerson[i].eventTime} 
 							   &nbsp  |  &nbsp 
@@ -83,15 +77,15 @@ function loadEmployeesFormTableTwo(ePerson){
 								Event Attachments: ${ePerson[i].eventAttachment} &nbsp  |  &nbsp  
 								Work Time Missed: ${ePerson[i].workTimeMissed} &nbsp  |  &nbsp  
 								<b>Estimated Reimbursement:</b> ${ePerson[i].estimatedReimbursement}` + '<hr> ';
-								
-								
-								
+
+
+
 		console.log("emp_table.js : loadEmployeesFormTableTwo() Table 2 Length: i : " + i);
-	
+
 	}
-	
+
 	document.getElementById("i_employee-table-two-info").innerHTML =  msg2;
-	
+
 }
 
 
@@ -128,8 +122,8 @@ function loadCommunicationTableForm(ePerson){
 	let msg3 = '';
 	console.log("emp_table.js : loadCommunicationTableForm()  Table 3 Length: " + ePerson.length);
 	for(let i = 0; i < tableLength; i++){
-		
-		
+
+
 			
 			//document.getElementById('i_formId').value = `${ePerson[i].formId}`;
 			//document.getElementById('i_employeeId').value = `${ePerson[i].employeeId}`;

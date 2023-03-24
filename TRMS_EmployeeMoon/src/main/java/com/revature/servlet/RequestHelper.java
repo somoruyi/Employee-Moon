@@ -1,22 +1,10 @@
 package com.revature.servlet;
 
-import java.io.IOException;
+import com.revature.controller.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.revature.controller.ApprovalController;
-import com.revature.controller.ApprovalLoginController;
-import com.revature.controller.EmployeeController;
-import com.revature.controller.EmployeeFormController;
-import com.revature.controller.EmployeeHistoryController;
-import com.revature.controller.EmployeeInfoController;
-import com.revature.controller.EmployeeLoginController;
-import com.revature.controller.EmployeeStatusController;
-import com.revature.controller.HomeController;
-import com.revature.controller.LogoutController;
-import com.revature.controller.EmpolyeeLogoutController;
+import java.io.IOException;
 
 
 public class RequestHelper {
@@ -25,6 +13,8 @@ public static String process(HttpServletRequest req, HttpServletResponse res) th
 		
 	//String projectName = "TRMS_EmployeeMoon";
 		System.out.println("RequestHelper.java : " + req.getRequestURI());
+		System.out.println("req : " + req);
+
 		switch(req.getRequestURI()) {
 			
 		case "/TRMS_EmployeeMoon/home": /* This case will display 'home' pages */

@@ -1,30 +1,17 @@
 package com.revature.controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.dao.ApprovalDao;
-import com.revature.dao.BalanceInfoDao;
-import com.revature.dao.CommunicationTableDao;
-import com.revature.dao.EmployeeDao;
-import com.revature.dao.EmployeeFormDao;
-import com.revature.daoimpl.ApprovalDaoImpl;
-import com.revature.daoimpl.BalanceInfoDaoImpl;
-import com.revature.daoimpl.CommunicationTableDaoImpl;
-import com.revature.daoimpl.EmployeeDaoImpl;
-import com.revature.daoimpl.EmployeeFormDaoImpl;
-import com.revature.model.Approval;
-import com.revature.model.BalanceInfo;
-import com.revature.model.CommunicationTable;
-import com.revature.model.Employee;
-import com.revature.model.EmployeeForm;
+import com.revature.dao.*;
+import com.revature.daoimpl.*;
+import com.revature.model.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ApprovalController {
 	public static ApprovalDao appdao = new ApprovalDaoImpl(); //Database Code

@@ -1,4 +1,4 @@
-create schema if not exists trms authorization root; --creates scheme trms
+create schema if not exists trms authorization postgres; --creates scheme trms
 set search_path to trms;
 
 create table employees (
@@ -44,7 +44,6 @@ a_username varchar(30),
 a_password varchar(30)
 );
 
-select * from communication_table;
 
 create table communication_table( --customer object table
 form_id int unique, --comes from table 2 position 1
@@ -94,5 +93,8 @@ create table balanceinfo(
 	foreign key (empId) references employees(empId)
 );
 
+-- Starting balance for all employees
 insert into balanceinfo
-values (8, 1000, 1000);
+values (3, 1000, 1000);
+
+select * from communication_table;
