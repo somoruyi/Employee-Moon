@@ -1,34 +1,46 @@
 # Employee Moon 
 ### Tuition Reimbursement Management System
-##### (Creators: Sandra, Nagma, & Petra)
+| Date       | Contributors           |
+|------------|------------------------|
+| 2021-01-01 | Sandra, Nagma, & Petra |
+
 ### Overview
 The purpose of the Tuition Reimbursement Management System(TRMS) is to provide a system that encourages quality knowledge growth relevant to an individual’s expertise. The
 new TRMS design will incorporate:
-- Back-End: Java, PostgreSQL, and Servlet, etc
-- Front-End: HTML, CSS, JavaScript, AJAX, and etc
 
-This project also incorporates cookies, which was not one of the required technologies.
 
-### Project Setup
-- Clone this repository to your machine.
-- Set up your database in Amazon RDS through the AWS website.
-- Save the endpoint connection(url), the username, and the password used to set up your database.
-- Add these values into the database.properties file.
-- Set up a connection in DBeaver using the url to establish a connection.
-- Make sure you have Apache Tomcat version 9.0 installed.
-- Run the trms.sql file to create a new schema and create new tables.
-- Run the TRMS_EmployeeMoon project in Spring Tool Suite and the console application is ready for you to use. Make sure to add the project to the server.
-- Start the server.
-- Go to http://localhost:8080/TRMS_EmployeeMoon/home
-- Login with the credentials below or create your own employee credentials in the database.
+### A. Tech Stack
 
-### Login
+| Catergory     | Contributors                                        |
+|---------------|-----------------------------------------------------|
+| Server Side   | `Java 8`                                            | 
+| Client Side   | `HTML5`  `CSS3`  `Javascript`  `ES6`  `Bootstrap 4` | 
+| Database      | `PostgreSQL 12`                                     |   
+| Testing       | `JUnit 4`                                           | 
+| Logging       | `log4j`                                             |
+
+### B. Setup
+1. Clone repository
+    ```bash
+     git clone -b main https://github.com/somoruyi/Employee-Moon.git
+    ```
+2. Setup your database **locally**:
+   - Download and install PostgreSQL 12.
+   - In pgAdmin 4 create a new database called trms.
+   - Run the trms.sql file to create a new schema and create new tables.
+3. Install Apache Tomcat version 8.5 - 9.0. 
+   - Add the project to the Apache server, and start it.
+4. Run the TRMS_EmployeeMoon project in your IDE. 
+   - Navigate to http://localhost:8080/TRMS_EmployeeMoon/home
+5. Login with the credentials below or create your own employee credentials in the database.
+
+### C. Authorization and Authentication
     
-- You can add employee's to the system by adding them to the database.
-- Example employee login credentials:
+
+- Sample employee login credentials (Note: You can add employee's to the system by adding them to the database):
 ```sh
-username: dtdeal
-password: burke
+username: ljames
+password: 23hart
 ```
 - Approver Login creditionals:
 ```sh
@@ -39,30 +51,34 @@ mgmt/password
 dirmgmt/password
 ```
 
-### Business Requirements
-- Each employee is allowed to claim up to $1000.00 in tuition reimbursement per
-year.
+### D. Business Requirements
+- Each employee is allowed to claim up to $1000.00 in tuition reimbursement per year.
 - The amount available to an employee is reset on the new year.
 - Event types have different standard reimbursement coverage.
-- After a BenCo has approved a reimbursement, the reimbursement is "pending"
-until a passing grade or presentation over the event is provided.
-- Employees must complete the Tuition Reimbursement form and the form must collect required information: basic employee information, date, time, location, description, cost, grading format (grade or presentation), event type, work-related justification, work time that will be missed, projected reimbursement, and optionally event-related attachments.
+- After a BenCo has approved a reimbursement, the reimbursement is "pending" until a passing grade or presentation over the event is provided.
+- Employees must complete the Tuition Reimbursement form and the form must collect required information: 
+  - basic employee information
+  - date
+  - time
+  - location
+  - description
+  - cost
+  - grading format (grade or presentation)
+  - event type
+  - work-related justification
+  - work time that will be missed
+  - projected reimbursement
+  - and optionally event-related attachments
 
-### Technologies
+### E. Features
+- Cookies
+- Session Management
 
-- Java 1.8
-- Servlets
-- JDBC
-- PL/SQL
-- HTML
-- CSS
-- Javascript
-- Bootstrap (optional)
-- AJAX
-- JUnit
-- log4j 
-- Tomcat Server
-- PostgreSQL 12
-- Eclipse/Spring Tools Suite
-- DBeaver
-- [Trello](https://trello.com/invite/b/o0HT6j4K/e746baecb5c84d154bf12b81bef08b1c/agile-sprint-board)
+### F. Screenshots
+<div style="text-align: center;">
+    <img src="image_1.PNG"> <br />
+    <img src="image_2.PNG"> <br />
+    <img src="image_3.PNG"> <br />
+    <img src="image_4.PNG"> <br />
+</div>
+
