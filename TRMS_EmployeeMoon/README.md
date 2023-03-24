@@ -18,7 +18,7 @@ new TRMS design will incorporate:
 | Database      | `PostgreSQL 12`                                     |   
 | Testing       | `JUnit 4`                                           | 
 | Logging       | `log4j`                                             |
-
+| Tools         | `Apache Tomcat 8.5 - 9`                             |
 ### B. Setup
 1. Clone repository
     ```bash
@@ -26,8 +26,9 @@ new TRMS design will incorporate:
     ```
 2. Setup your database **locally**:
    - Download and install PostgreSQL 12.
-   - In pgAdmin 4 create a new database called trms.
-   - Run the trms.sql file to create a new schema and create new tables.
+   - In `pgAdmin 4` create a new database names: **postgres**.
+   - Create a new schema named: **trms**
+   - Run the trms.sql file to and create new tables.
 3. Install Apache Tomcat version 8.5 - 9.0. 
    - Add the project to the Apache server, and start it.
 4. Run the TRMS_EmployeeMoon project in your IDE. 
@@ -75,10 +76,7 @@ dirmgmt/password
 - Session Management
 
 ### F. Screenshots
-<div style="text-align: center;">
-    <img src="image_1.PNG"> <br />
-    <img src="image_2.PNG"> <br />
-    <img src="image_3.PNG"> <br />
-    <img src="image_4.PNG"> <br />
-</div>
+<img src="fill_form.gif">
+<img src="approve_form.gif">
+
 
