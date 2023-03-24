@@ -1,7 +1,7 @@
 target/
-.idea/*
-.settings/*
-out/*
+TRMS_EmployeeMoon/.idea/
+TRMS_EmployeeMoon/.settings/
+TRMS_EmployeeMoon/out/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
