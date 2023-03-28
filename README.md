@@ -45,11 +45,14 @@ password: 23hart
 ```
 - Approver Login creditionals:
 ```sh
-benco/password
-dirsup/password
-dirhead/password
-mgmt/password
-dirmgmt/password
+username: benco
+username: dirsup
+username: dirhead
+username: mgmt
+username: dirmgmt
+```
+```sh
+password: password
 ```
 
 ### D. Business Requirements
