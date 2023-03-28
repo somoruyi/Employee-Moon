@@ -1,207 +1,209 @@
-// [1] click,load       : event
-// [2] xhr function     : getEmployeeInfo
-// [3] The use capture  : bubble or capture
+// Author: SE_Omo
 
+window.addEventListener('load', () => {
+    getEmployeesFormTableTwo();
+    getCommunicationTableForm();
+});
 
+function fetchData(url) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
 
-//window.addEventListener('load', getEmployeesTableOne, false);
-window.addEventListener('load', getCommunicationTableForm, false);
-window.addEventListener('load', getEmployeesFormTableTwo, false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                resolve(JSON.parse(xhr.responseText));
+            }
+        };
 
+        xhr.onerror = function () {
+            reject(new Error("Request failed."));
+        };
 
-// [B] Table 2 : Employee Form Info
-function getEmployeesFormTableTwo(){	
-	// [1] Create new xhr object 
-	var xhr = new XMLHttpRequest();
-	
-	
-	// [3] Open a request
-	xhr.open("GET","/TRMS_EmployeeMoon/getEmployeesFormSession.json", true);
-	xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send();
+    });
+}
 
+function getEmployeesFormTableTwo() {
+    fetchData("/TRMS_EmployeeMoon/getEmployeesFormSession.json")
+        .then(ePerson => {
+            loadEmployeesFormTableTwo(ePerson);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
 
-	// [2] Define onreadystatechange value
-	xhr.onreadystatechange = function(){
-		console.log("inside onreadystate");
-		if(xhr.readyState == 4 && xhr.status == 200){
-			let ePerson = JSON.parse(xhr.responseText); //context
-			console.log("ePerson: " + JSON.parse(xhr.responseText));
-			loadEmployeesFormTableTwo(ePerson);
-			
-		}
-	}
-	
-	// [4] Send request
-	xhr.send();
+function getCommunicationTableForm() {
+    fetchData("/TRMS_EmployeeMoon/getCommuncationTableSession.json")
+        .then(ePerson => {
+            loadCommunicationTableForm(ePerson);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+const jsonText = {
+    "option1": "Form ID",
+    "option2": "Employee ID",
+    "option3": "First",
+    "option4": "Last",
+    "option5": "Employee Id",
+    "option6": "Current Date",
+    "option7": "Event Date",
+    "option8": "Event Time",
+    "option9": "Event Location",
+    "option10": "Event Cost",
+    "option11": "Event Type",
+    "option12": "Description",
+    "option13": "Grading Format",
+    "option14": "Work Related Justification",
+    "option15": "Event Attachments",
+    "option16": "Work Time Missed",
+    "option17": "Estimated Reimbursement",
+    "person1": "id",
+    "person2": "employeeId",
+    "person3": "firstName",
+    "person4": "lastName",
+    "person5": "employeeId",
+    "person6": "currDate",
+    "person7": "eventDate",
+    "person8": "eventTime",
+    "person9": "eventLocation",
+    "person10": "eventCost",
+    "person11": "eventType",
+    "person12": "description",
+    "person13": "gradingFormat",
+    "person14": "workRelJust",
+    "person15": "eventAttachment",
+    "person16": "workTimeMissed",
+    "person17": "estimatedReimbursement"
+};
+
+function loadEmployeesFormTableTwo(ePerson) {
+    let formInfo = '';
+
+    for (let i = 0; i < ePerson.length; i++) {
+        const person = ePerson[i];
+        let html = '<hr>';
+
+        for (let i = 1; i <= Object.keys(jsonText).length / 2; i++) {
+            if (jsonText['person' + i] === "firstName") {
+                html += `<b>${jsonText['option' + i]} : </b> `;
+                html += `<span class="c_emp-style" onclick="loadValues(${person.id}, ${person.employeeId}, ${person.estimatedReimbursement})">`;
+                html += `${person[jsonText['person' + i]]} ${person[jsonText['person' + (i + 1)]]}`;
+                html += `</span>`;
+                i++; // Skip the next key
+            } else {
+                html += `<b>${jsonText['option' + i]} : </b> `;
+                html += `${person[jsonText['person' + i]]}`;
+            }
+
+            if (i < Object.keys(jsonText).length / 2) {
+                html += ' &nbsp | &nbsp ';
+            }
+        }
+
+        html += '<hr>';
+        formInfo += html;
+    }
+
+    document.getElementById("i_employee-table-two-info").innerHTML = formInfo;
 }
 
 
+function loadValues(formId, employeeId, estimatedReimbursement) {
+    document.getElementById('i_formId').value = formId;
+    document.getElementById('i_employeeId').value = employeeId;
+    document.getElementById('i_estimReimbursement').value = estimatedReimbursement;
+}
 
-function loadEmployeesFormTableTwo(ePerson){
+const jsonText2 = {
+    "option1": "Form ID",
+    "option2": "Employee ID",
+    "option3": "Estimated Reimbursement",
+    "option4": "Need Additional Info",
+    "option5": "Requestee Response",
+    "option6": "Altered Reimbursement",
+    "option7": "Reason For Altered Amount",
+    "option8": "Exceeding Available Funds",
+    "option9": "Pending Amount",
+    "option10": "Notified Employee",
+    "option11": "Employee Option to Cancel",
+    "option12": "Approval Status",
+    "option13": "Event Grade",
+    "option14": "Event Presentation",
+    "option15": "Viewed Presentation(Management)",
+    "option16": "Approved Presentation(Direct Manager)",
+    "option17": "Grade Status(Direct Supervisor)",
+    "option18": "Approval (Direct Supervisor)",
+    "option19": "Approval (Department Head)",
+    "option20": "Final Approval (BenCo)",
+    "option21": "Marked Urgent",
+    "option22": "Automatic Approval(Direct Supervisor)",
+    "option23": "Automatic Approval(Department Head)",
+    "option24": "Escalation Emailed to Direct Supervisor",
+    "option25": "Final Reimbursement Value",
+    "person1": "formId",
+    "person2": "employeeId",
+    "person3": "estimReimbursement",
+    "person4": "requestorNeedAdditionalInfoFrom",
+    "person5": "requesteeResponse",
+    "person6": "alterReimbursmentAmount",
+    "person7": "reasonForLargerAmount",
+    "person8": "exceedingAvailableFunds",
+    "person9": "pendingAmountVal",
+    "person10": "notifyEmployee",
+    "person11": "employeeOptionToCancel",
+    "person12": "approvalStatus",
+    "person13": "eventGrade",
+    "person14": "eventPresentation",
+    "person15": "mgmtViewPresent",
+    "person16": "dirMgrApprPresent",
+    "person17": "gradeStatusDirectSup",
+    "person18": "directSupAppr",
+    "person19": "deptHeadAppr",
+    "person20": "bencoFinalAppr",
+    "person21": "markedUrgent",
+    "person22": "automaticApprovDirectSup",
+    "person23": "automaticApprovDeptHead",
+    "person24": "escalationEmailDirectSup",
+    "person25": "finalReimburseValBenco"
+};
 
-	let tableLength = ePerson.length;
-	let msg2 = '';
-	console.log("emp_table.js : loadEmployeesFormTableTwo(): " + ePerson.length);
+function loadCommunicationTableForm(ePerson) {
+    let statusInfo = '';
+    for (let i = 0; i < ePerson.length; i++) {
+        const person = ePerson[i];
+        let html = '<hr>';
 
-	for(let i = 0; i < tableLength; i++){
+        for (let i = 1; i <= Object.keys(jsonText2).length / 2; i++) {
+            if(i <= 21) {
+                html += `<a href="#" class="c_blue-link"> <b>${jsonText2['option' + i]} : </b></a>`;
+                html += `<a href="#" class="c_blue-link">${person[jsonText2['person' + i]]}</a>`;
+            } else if(i >= 22 && i <= 24) {
+                html += `<a href="#" class="c_red-trigger"> <b>${jsonText2['option' + i]} : </b></a>`;
+                html += `<a href="#" class="c_red-trigger">${person[jsonText2['person' + i]]}</a>`;
+            } else if(i == 25) {
+                html += `<br /><a href="#" class="c_green-link"> <b>${jsonText2['option' + i]} : </b></a>`;
+                html += `<a href="#" class="c_green-link">${person[jsonText2['person' + i]]}</a>`;
+            }
+            if (i < Object.keys(jsonText2).length / 2) {
+                html += ' &nbsp | &nbsp ';
+            }
+            if (i == 21) {
+                html += '<br />';
+            }
+        }
 
-		msg2 += '<hr><b> Employee: Form Id:</b>' +
-		` <span class="c_emp-style"> ${ePerson[i].id} </span>
-		  &nbsp   | &nbsp
-		 <span class="c_emp-style c_emp-style-${ePerson[i].formId}">
-		
-		 <span href="#" onclick="function loadValues(){
-            document.getElementById('i_formId').value = ${ePerson[i].id}
-		 	document.getElementById('i_employeeId').value = ${ePerson[i].employeeId}
-		 	document.getElementById('i_estimReimbursement').value = ${ePerson[i].estimatedReimbursement} 
-         } loadValues()"> 
-         	<b>Full Name: </b> ${ePerson[i].firstName} ${ePerson[i].lastName} 
-         	</span></span>
-		
-	  						&nbsp  | &nbsp
-							<span class="c_emp-style" onclick='loadValues'> 
-							 <b>Employee Id:</b> ${ePerson[i].employeeId}   </span>					
-							 &nbsp  |  &nbsp 
-							<b> Current Date:</b> ${new Date(ePerson[i].currDate).toLocaleString('en-US', {hour12: false}).split(", ")} 
-							   &nbsp  |  &nbsp  
-							   <b>Event Date:</b> ${new Date(ePerson[i].eventDate).toLocaleString('en-US', {hour12: false}).split(", ")} 
-							   &nbsp  |  &nbsp  
-							   <b>Event Time:</b> ${ePerson[i].eventTime} 
-							   &nbsp  |  &nbsp 
-							   Event Location:  ${ePerson[i].eventLocation} &nbsp  |  &nbsp 
-							<b>Event Cost:</b> ${ePerson[i].eventCost} &nbsp  |  &nbsp  
-							Event Type: ${ePerson[i].eventType} &nbsp  |  &nbsp 
-							Description:  ${ePerson[i].description} &nbsp  |  &nbsp  
-							<b>Grading Format:</b> ${ePerson[i].gradingFormat}  &nbsp  |  &nbsp 
-								Work Related Justification: ${ePerson[i].workRelJust} &nbsp  |  &nbsp | 
-								Event Attachments: ${ePerson[i].eventAttachment} &nbsp  |  &nbsp  
-								Work Time Missed: ${ePerson[i].workTimeMissed} &nbsp  |  &nbsp  
-								<b>Estimated Reimbursement:</b> ${ePerson[i].estimatedReimbursement}` + '<hr> ';
+        html += '<hr>';
+        statusInfo += html;
+    }
 
-
-
-		console.log("emp_table.js : loadEmployeesFormTableTwo() Table 2 Length: i : " + i);
-
-	}
-
-	document.getElementById("i_employee-table-two-info").innerHTML =  msg2;
+    document.getElementById("i_employee-table-three-info").innerHTML = statusInfo;
 
 }
 
 
-
-	// [C] Table 3 : Communication Table
-	
-	function getCommunicationTableForm(){	
-	
-	// [1] Create new xhr object 
-	var xhr = new XMLHttpRequest();
-	
-	
-	// [3] Open a request
-	xhr.open("GET", "/TRMS_EmployeeMoon/getCommuncationTableSession.json", true);
-	xhr.setRequestHeader("Content-Type", "application/json");
-
-
-	// [2] Define onreadystatechange value
-	xhr.onreadystatechange = function(){
-		console.log("inside onreadystate");
-		if(xhr.readyState == 4 && xhr.status == 200){
-			let ePerson = JSON.parse(xhr.responseText); //context
-			console.log("ePerson: " + JSON.parse(xhr.responseText));
-			loadCommunicationTableForm(ePerson);
-		}
-	}
-	
-	// [4] Send request
-	xhr.send();
-}
-
-function loadCommunicationTableForm(ePerson){
-	let tableLength = ePerson.length;
-	let msg3 = '';
-	console.log("emp_table.js : loadCommunicationTableForm()  Table 3 Length: " + ePerson.length);
-	for(let i = 0; i < tableLength; i++){
-
-
-			
-			//document.getElementById('i_formId').value = `${ePerson[i].formId}`;
-			//document.getElementById('i_employeeId').value = `${ePerson[i].employeeId}`;
-			//document.getElementById('i_estimReimbursement').value = `${ePerson[i].estimReimbursement}`;
-
-
-		msg3 += '<p></p> <hr> <b>Employee</b> : ' + 
-							   `<a href="#" class="c_blue-link"> <b>Form ID:</b> ${ePerson[i].formId}</a> &nbsp  |  &nbsp 
-							    <a href="#" class="c_blue-link"><b>Employee ID:</b> ${ePerson[i].employeeId}</a>  &nbsp  |  &nbsp
-							    <a href="#" class="c_blue-link"><b>Estimated Reimbursement:</b> ${ePerson[i].estimReimbursement}</a>  &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link"><b>Need Additional Info</b>: ${ePerson[i].requestorNeedAdditionalInfoFrom}</a>  &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link"><b>Requestee Response:</b> ${ePerson[i].requesteeResponse}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link"><b>Altered Reimbursement:</b> ${ePerson[i].alterReimbursmentAmount}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link">Reason For Altered Amount: ${ePerson[i].reasonForLargerAmount}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link">Exceeding Available Funds: ${ePerson[i].exceedingAvailableFunds}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link"><b>Pending Amount:</b> ${ePerson[i].pendingAmountVal}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link">Notified Employee: ${ePerson[i].notifyEmployee}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link"><b>Employee Option to Cancel:</b> ${ePerson[i].employeeOptionToCancel} &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link"><b>Approval Status:</b> ${ePerson[i].approvalStatus}</a>   &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link"><b>Event Grade:</b> ${ePerson[i].eventGrade}</a>  &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link">Event Presentation: ${ePerson[i].eventPresentation}</a>  &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link"><b>Viewed Presentation(Management):</b> ${ePerson[i].mgmtViewPresent}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link"><b>Approved Presentation(Direct Manager)</b>: ${ePerson[i].dirMgrApprPresent}</a>  &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link">Grade Status(Direct Supervisor): ${ePerson[i].gradeStatusDirectSup}</a>  &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link">Approval (Direct Supervisor): ${ePerson[i].directSupAppr}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link">Approval (Department Head): ${ePerson[i].deptHeadAppr}</a>  &nbsp  |  &nbsp
-								<a href="#" class="c_blue-link">Final Approval (BenCo): ${ePerson[i].bencoFinalAppr} </a> &nbsp  |  &nbsp 
-								<a href="#" class="c_blue-link"><b>Marked Urgent:</b> ${ePerson[i].markedUrgent}</a>  
-								
-								<br><span class="c_trigger-msg"> Automatic Triggers if Delayed: </span> <br>
-								<span class="c_red-trigger">
-								Automatic Approval(Direct Supervisor): ${ePerson[i].automaticApprovDirectSup}</span> &nbsp  |  &nbsp
-								<span class="c_red-trigger">Automatic Approval(Department Head): ${ePerson[i].automaticApprovDeptHead}</span> &nbsp  |  &nbsp 
-								<span class="c_red-trigger">Escalation Emailed to Direct Supervisor: ${ePerson[i].escalationEmailDirectSup}</span> 
-								</span><br>
-								
-								<b><a href="#" class="c_green-link">Final Reimbursement Value: $${ePerson[i].finalReimburseValBenco}</a> </b>`  + ' <hr>';
-								
-		console.log("emp_table.js : loadCommunicationTableForm() Table 3 Length: i : " + i);
-	}
-	document.getElementById("i_employee-table-three-info").innerHTML =  msg3;
-	
-	}
-
-	// // [A] Table 1 - Employee Info
-// function getEmployeesTableOne(){	
-// 	// [1] Create new xhr object 
-// 	var xhr = new XMLHttpRequest();
-	
-	
-// 	// [3] Open a request
-// 	xhr.open("GET","/TRMS_EmployeeMoon/getEmployeesSession.json", true);
-// 	//xhr.open("GET",url, true);
-// 	xhr.setRequestHeader("Content-Type", "application/json");
-
-
-// 	// [2] Define onreadystatechange value
-// 	xhr.onreadystatechange = function(){
-// 		console.log("inside onreadystate");
-// 		if(xhr.readyState == 4 && xhr.status == 200){
-// 			let ePerson = JSON.parse(xhr.responseText); //context
-// 			console.log("ePerson: " + JSON.parse(xhr.responseText));
-// 			loadEmployeesTableOne(ePerson);
-// 		}
-// 	}
-	
-// 	// [4] Send request
-// 	xhr.send();
-// }
-// function loadEmployeesTableOne(ePerson){
-// 	let tableLength = ePerson.length;
-// 	let msg1 = '';
-// 	console.log("emp_table.js : loadEmployeesTableOne(): " + ePerson.length);
-// 	for(let i = 0; i < tableLength; i++){
-		
-		
-// 		msg1 += 'Employee :' + `${ePerson[i].empId} | ${ePerson[i].firstName} ${ePerson[i].lastName} | ${ePerson[i].username} | ${ePerson[i].password} | ${ePerson[i].address} | ${ePerson[i].email} | ${ePerson[i].phone}` + '<br />';
-// 		console.log("emp_table.js : loadEmployeesTableOne() Table 1 : i : " + i);
-// 	}
-// 	document.getElementById("i_employee-table-one-info").innerHTML = msg1;
-// }
