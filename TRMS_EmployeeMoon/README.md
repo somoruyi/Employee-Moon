@@ -5,8 +5,7 @@
 | 2021-01-01 | Sandra, Nagma, & Petra |
 
 ### Overview
-The purpose of the Tuition Reimbursement Management System(TRMS) is to provide a system that encourages quality knowledge growth relevant to an individual’s expertise. The
-new TRMS design will incorporate:
+The purpose of the Tuition Reimbursement Management System(TRMS) app is to collect essential information via the Tuition Reimbursement form, including employee details, event specifics, costs, grading format, event type, justification, missed work time, and projected reimbursement. Additionally, employees can optionally attach event-related documents.
 
 
 ### A. Tech Stack
